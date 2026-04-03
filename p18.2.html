@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form - Plain HTML/JS</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 30px;
+        }
+        input, textarea {
+            font-size: 1rem;
+            padding: 8px;
+            width: 280px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        button {
+            font-size: 1rem;
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        .thank-you {
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 30px;">
+        <h2>Feedback Form</h2>
+
+        <!-- Form container (visible initially) -->
+        <div id="formContainer">
+            <form id="feedbackForm">
+                <input type="text" id="nameInput" placeholder="Name" value="" />
+                <br /><br />
+                <input type="email" id="emailInput" placeholder="Email" value="" />
+                <br /><br />
+                <textarea id="feedbackInput" placeholder="Enter Feedback"></textarea>
+                <br /><br />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Thank you message container (hidden initially) -->
+        <div id="thankYouContainer" style="display: none;">
+            <h3 class="thank-you">Thank you for your feedback!</h3>
+        </div>
+    </div>
+
+    <script>
+        // State variables (mirror useState)
+        let name = "";
+        let email = "";
+        let feedback = "";
+        let submitted = false;
+
+        // DOM elements
+        const formContainer = document.getElementById("formContainer");
+        const thankYouContainer = document.getElementById("thankYouContainer");
+        const nameInput = document.getElementById("nameInput");
+        const emailInput = document.getElementById("emailInput");
+        const feedbackInput = document.getElementById("feedbackInput");
+        const form = document.getElementById("feedbackForm");
+
+        // Function to update UI based on current state
+        function updateUI() {
+            // Sync input values with state (controlled components)
+            if (nameInput.value !== name) nameInput.value = name;
+            if (emailInput.value !== email) emailInput.value = email;
+            if (feedbackInput.value !== feedback) feedbackInput.value = feedback;
+
+            // Conditional rendering: show form or thank you message
+            if (submitted) {
+                formContainer.style.display = "none";
+                thankYouContainer.style.display = "block";
+            } else {
+                formContainer.style.display = "block";
+                thankYouContainer.style.display = "none";
+            }
+        }
+
+        // Input event handlers
+        nameInput.addEventListener("input", (e) => {
+            name = e.target.value;
+            // No need to call updateUI fully, but keep sync (optional)
+            // For consistency, we can just update state; UI already shows new value.
+        });
+
+        emailInput.addEventListener("input", (e) => {
+            email = e.target.value;
+        });
+
+        feedbackInput.addEventListener("input", (e) => {
+            feedback = e.target.value;
+        });
+
+        // Form submission handler
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();   // prevent page reload
+            submitted = true;
+            updateUI();           // re-render to show thank you message
+        });
+
+        // Initial render (matches React initial state: submitted = false)
+        updateUI();
+    </script>
+</body>
+</html>

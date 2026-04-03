@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form - Plain HTML/JS</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 30px;
+        }
+        input {
+            font-size: 1rem;
+            padding: 8px;
+            width: 250px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            font-size: 1rem;
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        .details {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 30px;">
+        <h2>User Form</h2>
+
+        <form id="userForm">
+            <input type="text" id="nameInput" placeholder="Enter Name" value="" />
+            <br /><br />
+            <input type="email" id="emailInput" placeholder="Enter Email" value="" />
+            <br /><br />
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Container for submitted details (initially hidden) -->
+        <div id="submittedDetails" style="display: none;">
+            <div class="details">
+                <h3>User Details</h3>
+                <p id="displayName">Name: </p>
+                <p id="displayEmail">Email: </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State variables (matching useState in React)
+        let name = "";
+        let email = "";
+        let submitted = false;
+
+        // DOM elements
+        const nameInput = document.getElementById("nameInput");
+        const emailInput = document.getElementById("emailInput");
+        const form = document.getElementById("userForm");
+        const detailsContainer = document.getElementById("submittedDetails");
+        const displayNameSpan = document.getElementById("displayName");
+        const displayEmailSpan = document.getElementById("displayEmail");
+
+        // Helper function to update UI based on current state
+        function updateUI() {
+            // Sync input values with state (controlled component behavior)
+            if (nameInput.value !== name) {
+                nameInput.value = name;
+            }
+            if (emailInput.value !== email) {
+                emailInput.value = email;
+            }
+
+            // Show/hide submitted details based on submitted flag
+            if (submitted) {
+                detailsContainer.style.display = "block";
+                displayNameSpan.textContent = "Name: " + name;
+                displayEmailSpan.textContent = "Email: " + email;
+            } else {
+                detailsContainer.style.display = "none";
+            }
+        }
+
+        // Event: name input change
+        nameInput.addEventListener("input", (e) => {
+            name = e.target.value;
+            updateUI();  // re-sync (though input already shows new value, but keep consistency)
+        });
+
+        // Event: email input change
+        emailInput.addEventListener("input", (e) => {
+            email = e.target.value;
+            updateUI();
+        });
+
+        // Form submission handler
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();   // prevent page reload
+            submitted = true;
+            updateUI();
+        });
+
+        // Initial UI render (matches initial React state: name="", email="", submitted=false)
+        updateUI();
+    </script>
+</body>
+</html>
