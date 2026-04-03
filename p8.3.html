@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>Flexible Date Formatter</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 60px auto;
+      padding: 30px;
+      background: #f4f6f9;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #dd0031;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      font-size: 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a30025;
+    }
+
+    hr {
+      margin: 20px 0;
+      border: none;
+      border-top: 1px solid #eee;
+    }
+
+    .result p {
+      font-size: 15px;
+      color: #444;
+      margin: 8px 0;
+    }
+
+    .result b {
+      color: #111;
+    }
+  </style>
+</head>
+<body ng-controller="myCtrl">
+
+  <div class="card">
+    <h2>📅 Universal Date Formatter</h2>
+
+    <input type="text" ng-model="rawDate" placeholder="e.g. 2024/12/25 or 12/25/2024">
+
+    <br>
+
+    <button ng-click="processDate()">SUBMIT</button>
+
+    <hr>
+
+    <div class="result" ng-if="formattedDate">
+      <p><b>Original Input:</b> {{ rawDate }}</p>
+      <p><b>Formatted Result:</b> {{ formattedDate | date : 'MM/dd/yyyy' }}</p>
+    </div>
+  </div>
+
+  <script>
+    // Define the module
+    var app = angular.module("myApp", []);
+
+    // Define the controller
+    app.controller("myCtrl", function($scope) {
+
+      $scope.processDate = function() {
+
+        if ($scope.rawDate) {
+
+          // Convert the input string into a JS Date object
+          var dateObj = new Date($scope.rawDate);
+
+          // Check if the input was a valid date
+          if (!isNaN(dateObj.getTime())) {
+            $scope.formattedDate = dateObj;
+          } else {
+            alert("Invalid Date Format! Please try: YYYY/MM/DD or MM/DD/YYYY");
+            $scope.formattedDate = null;
+          }
+
+        }
+      };
+
+    });
+  </script>
+
+</body>
+</html>

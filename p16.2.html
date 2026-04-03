@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Lifecycle Example - Plain HTML/JS</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 30px;">
+        <h2>React Lifecycle Example</h2>
+        <p>Open the browser console (F12) to see the lifecycle logs.</p>
+    </div>
+
+    <script>
+        // Simulating component mount: runs once when the script executes
+        console.log("Mounted");
+
+        // Simulating component update: runs immediately after mount (and would run on every state change)
+        // In React, useEffect without dependencies runs after every render, including the initial one.
+        console.log("Updated");
+
+        // Simulating component unmount: cleanup runs when the page is being closed or reloaded
+        window.addEventListener("beforeunload", function() {
+            console.log("Unmounted");
+        });
+
+        // Optional note: If there were state changes (like a counter), we could re-run the "Updated" logic.
+        // For demonstration, the above logs match the exact behavior of the original code with no state/props changes.
+    </script>
+</body>
+</html>

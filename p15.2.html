@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Example - Plain HTML/JS</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 30px;
+        }
+        button {
+            font-size: 1rem;
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        .counter {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 30px;">
+        <h2>Counter: <span id="counterValue">0</span></h2>
+        <button id="incrementButton">Increase Counter</button>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const counterSpan = document.getElementById("counterValue");
+        const button = document.getElementById("incrementButton");
+
+        // State equivalent
+        let count = 0;
+
+        // Function to update the UI whenever count changes
+        function updateCounter() {
+            counterSpan.textContent = count;
+        }
+
+        // Increment function (equivalent to increaseCount in React)
+        function increaseCount() {
+            count = count + 1;
+            updateCounter();
+        }
+
+        // Attach click event handler
+        button.addEventListener("click", increaseCount);
+    </script>
+</body>
+</html>

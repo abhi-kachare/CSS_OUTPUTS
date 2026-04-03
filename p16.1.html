@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passing Function Example - Plain HTML/JS</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 30px;
+        }
+        button {
+            font-size: 1rem;
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 30px;">
+        <h2>Passing Function Example</h2>
+        <button id="greetButton">Click</button>
+    </div>
+
+    <script>
+        // Function that shows alert with name (equivalent to show in React)
+        function show(name) {
+            alert("Hello " + name);
+        }
+
+        // Get the button element
+        const button = document.getElementById("greetButton");
+
+        // Attach click event that calls show with "Student"
+        button.addEventListener("click", function() {
+            show("Student");
+        });
+    </script>
+</body>
+</html>

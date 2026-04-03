@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Records</title>
+</head>
+<body>
+
+<table id="myTable" border="1">
+  <tr>
+    <th>Name</th>
+    <th>Class</th>
+    <th>Location</th>
+    <th>Department</th>
+    <th>Division</th>
+  </tr>
+</table>
+
+<script>
+  var records = [
+    { "Name":"Amit",   "Class":"FY", "Location":"Pune",     "Department":"IT",   "Division":"A" },
+    { "Name":"Rohit",  "Class":"FY", "Location":"Mumbai",   "Department":"CS",   "Division":"B" },
+    { "Name":"Sneha",  "Class":"SY", "Location":"Nashik",   "Department":"IT",   "Division":"A" },
+    { "Name":"Pooja",  "Class":"SY", "Location":"Pune",     "Department":"ENTC", "Division":"B" },
+    { "Name":"Rahul",  "Class":"TY", "Location":"Nagpur",   "Department":"CS",   "Division":"A" },
+    { "Name":"Neha",   "Class":"TY", "Location":"Mumbai",   "Department":"IT",   "Division":"B" },
+    { "Name":"Sanket", "Class":"FY", "Location":"Pune",     "Department":"CS",   "Division":"A" },
+    { "Name":"Kiran",  "Class":"SY", "Location":"Kolhapur", "Department":"IT",   "Division":"B" },
+    { "Name":"Vishal", "Class":"TY", "Location":"Pune",     "Department":"ENTC", "Division":"A" },
+    { "Name":"Priya",  "Class":"FY", "Location":"Nashik",   "Department":"CS",   "Division":"B" }
+  ];
+
+  var table = document.getElementById("myTable");
+
+  for (var i = 0; i < records.length; i++) {
+    var row = table.insertRow();
+    row.insertCell().innerHTML = records[i].Name;
+    row.insertCell().innerHTML = records[i].Class;
+    row.insertCell().innerHTML = records[i].Location;
+    row.insertCell().innerHTML = records[i].Department;
+    row.insertCell().innerHTML = records[i].Division;
+  }
+</script>
+
+</body>
+</html>

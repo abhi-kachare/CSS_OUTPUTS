@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React useState Hook Example - Plain HTML/JS</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 30px;
+        }
+        button {
+            font-size: 1rem;
+            padding: 8px 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        input {
+            font-size: 1rem;
+            padding: 8px;
+            width: 200px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        hr {
+            margin: 20px 0;
+        }
+        .counter-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 30px;">
+        <h2>React useState Hook Example</h2>
+
+        <!-- Counter Section -->
+        <h3>Counter: <span id="counterValue" class="counter-value">0</span></h3>
+        <button id="increaseBtn">Increase</button>
+        <button id="decreaseBtn">Decrease</button>
+
+        <hr />
+
+        <!-- Input Section -->
+        <h3>Enter Your Name:</h3>
+        <input type="text" id="nameInput" value="" />
+        <p>Hello, <span id="greetingName"></span></p>
+    </div>
+
+    <script>
+        // State 1: Counter
+        let count = 0;
+
+        // State 2: User Name
+        let name = "";
+
+        // DOM elements
+        const counterSpan = document.getElementById("counterValue");
+        const nameInput = document.getElementById("nameInput");
+        const greetingSpan = document.getElementById("greetingName");
+
+        // Function to update counter UI
+        function updateCounterUI() {
+            counterSpan.textContent = count;
+        }
+
+        // Function to update name UI
+        function updateNameUI() {
+            greetingSpan.textContent = name;
+            // Keep input field in sync (if changed programmatically)
+            if (nameInput.value !== name) {
+                nameInput.value = name;
+            }
+        }
+
+        // Increase button handler
+        document.getElementById("increaseBtn").addEventListener("click", () => {
+            count = count + 1;
+            updateCounterUI();
+        });
+
+        // Decrease button handler
+        document.getElementById("decreaseBtn").addEventListener("click", () => {
+            count = count - 1;
+            updateCounterUI();
+        });
+
+        // Input change handler
+        nameInput.addEventListener("input", (event) => {
+            name = event.target.value;
+            updateNameUI();
+        });
+
+        // Initialize UI (mirrors initial useState values)
+        updateCounterUI();   // count = 0
+        updateNameUI();      // name = "" (empty greeting)
+    </script>
+</body>
+</html>

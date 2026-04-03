@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+  <title>Student Table Sort</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="StudentController">
+
+  <h2>Student List</h2>
+
+  <button ng-click="sortAsc()">Sort Name Ascending</button>
+  <button ng-click="sortDesc()">Sort Name Descending</button>
+
+  <br><br>
+
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Course</th>
+    </tr>
+    <tr ng-repeat="s in students | orderBy:sortColumn:reverse">
+      <td>{{s.name}}</td>
+      <td>{{s.age}}</td>
+      <td>{{s.course}}</td>
+    </tr>
+  </table>
+
+<script>
+  var app = angular.module("studentApp", []);
+  app.controller("StudentController", function($scope) {
+
+    $scope.students = [
+      { name: "Rahul", age: 20, course: "Computer"    },
+      { name: "Amit",  age: 21, course: "IT"          },
+      { name: "Sneha", age: 19, course: "Electronics" },
+      { name: "Kiran", age: 22, course: "Mechanical"  }
+    ];
+
+    $scope.sortColumn = "name";
+    $scope.reverse    = false;
+
+    $scope.sortAsc = function() {
+      $scope.sortColumn = "name";
+      $scope.reverse    = false;
+    };
+
+    $scope.sortDesc = function() {
+      $scope.sortColumn = "name";
+      $scope.reverse    = true;
+    };
+
+  });
+</script>
+
+</body>
+</html>

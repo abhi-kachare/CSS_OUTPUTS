@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React form handling</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [formData, setFormData] = React.useState({
+        name: "",
+        email: "",
+        password: ""
+      });
+
+      const [submitted, setSubmitted] = React.useState(null);
+
+      const handleChange = (e) => {
+        setFormData({
+          ...formData,
+          [e.target.name]: e.target.value
+        });
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        setSubmitted(formData);
+        setFormData({ name: "", email: "", password: "" });
+      };
+
+      return (
+        <div style={{ padding: "30px" }}>
+          <h2>React form handling</h2>
+
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <br /><br />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <br /><br />
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <br /><br />
+
+            <button type="submit">Submit</button>
+          </form>
+
+          <hr />
+
+          {submitted && (
+            <div>
+              <h3>Submitted Data</h3>
+              <p><b>Name:</b> {submitted.name}</p>
+              <p><b>Email:</b> {submitted.email}</p>
+              <p><b>Password:</b> {submitted.password}</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+
+</body>
+</html>

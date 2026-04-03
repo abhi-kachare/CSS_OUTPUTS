@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color Change - Plain HTML/JS</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 30px;
+        }
+        .color-box {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+            transition: background-color 0.2s ease;
+        }
+        button {
+            font-size: 1rem;
+            padding: 8px 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 30px;">
+        <h2>Background Color Change</h2>
+        <div id="colorBox" class="color-box" style="background-color: lightblue;"></div>
+        <button id="greenBtn">Change to Green</button>
+        <button id="redBtn">Change to Red</button>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const colorBox = document.getElementById("colorBox");
+        const greenBtn = document.getElementById("greenBtn");
+        const redBtn = document.getElementById("redBtn");
+
+        // State equivalent: current color (initial value matches the inline style)
+        let currentColor = "lightblue";
+
+        // Function to update the box's background color
+        function setColor(newColor) {
+            currentColor = newColor;
+            colorBox.style.backgroundColor = currentColor;
+        }
+
+        // Attach click handlers
+        greenBtn.addEventListener("click", function() {
+            setColor("lightgreen");
+        });
+
+        redBtn.addEventListener("click", function() {
+            setColor("lightcoral");
+        });
+    </script>
+</body>
+</html>
